@@ -14,6 +14,7 @@ LANG: C++11
 #include <utility>
 #include <cmath>
 #include <cstring>
+#define LL unsigned long long
 using namespace std;
 
 int main() {
