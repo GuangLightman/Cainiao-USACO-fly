@@ -96,7 +96,7 @@ int run(){
     } 
     return t;
 }
-int main() {
+int main(){
     ofstream fout ("ttwo.out");
     ifstream fin ("ttwo.in");
     intial(fin);
