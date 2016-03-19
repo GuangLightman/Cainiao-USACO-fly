@@ -15,15 +15,13 @@ LANG: C++11
 #include <cmath>
 #include <cstring>
 #define LL unsigned long long
+#define inf 
+#define INF (~(1<<31))
+
 using namespace std;
 
 int main() {
-    ofstream fout ("template.out");
-    ifstream fin ("template.in");
-    int T;
-    fin >> T;
-    fout << << endl;
-    fin.close();
-    fout.close();
+    freopen("template.out", "w", stdout);
+    freopen("template.in", "r", stdin);
     return 0;
 }
