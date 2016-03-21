@@ -17,7 +17,6 @@ LANG: C++11
 #define LL unsigned long long
 #define inf 
 #define INF (~(1<<31))
-
 using namespace std;
 
 int main() {
