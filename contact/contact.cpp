@@ -22,16 +22,24 @@ int A, B;
 int cnt[1<<13] = {0};
 int n;
 #define tun(a, i) ((1<<i)-1 + (((1<<i)-1)&a))
+class cmp{
+public:
+    bool operator()(const pair<int, int> & lhs, const pair<int, int> &rhs) const {
+        if(lhs.first < rhs.first || (lhs.first == rhs.first && lhs.second > rhs.second))
+            return true;
+        return false;
+    }
+};
 class tool{
     public:
-    int a = 0;
+    unsigned int a = 0;
+    int len = 0;
     void read(char c){
         a <<= 1;
+        len++;
         if(c == '1')
             a++;
-        else if(c != '0')
-            cout << "error\n";         
-        for(int i = A; i <= B; i++)
+        for(int i = A; i<= len && i <= B; i++)
             cnt[tun(a, i)]++;
     }
     string binary(int x)
@@ -45,7 +53,7 @@ class tool{
         return s;
     }
     string tostring(int i){
-        int l = (int)log2((double)i);
+        int l = (int)log2((double)(i+1));
         int n = i - ((1<<l)-1);
         string s = binary(n);
         if(s.size() < l){
@@ -55,7 +63,7 @@ class tool{
         return s;
     }
     void out(){
-        priority_queue<pair<int, int> > Q;
+        priority_queue<pair<int, int>, vector<pair<int, int> >, cmp> Q;
         for(int i = (1<<A)-1; i < (1<<(B+1))-1; i++)
             Q.push(make_pair(cnt[i], i));
         for(int i = 0; i < n && !Q.empty(); i++){
@@ -64,13 +72,18 @@ class tool{
             int c = p.first;
             cout << c << endl;
             cout << tostring(p.second);
+            int index = 1;
             while(!Q.empty()){
                 auto p = Q.top();
                 if(p.first != c) break;
                 Q.pop();
+                index++;
                 cout << " " << tostring(p.second);
+                if(index % 6 == 0)
+                    cout << "\n";
             }
-            cout << endl;
+            if(index%6) 
+                cout << endl;
         }
     }
 };
@@ -83,7 +96,6 @@ int main() {
     while(EOF != scanf("%c", &c)){
         if(c == '0' || c == '1')
             t.read(c);
-        putchar(c);
     }
     t.out();
     //cout << tun(2,3) << "  " << (1<<3)-1 << " " << (((1<<3)-1)&2);
